@@ -1,0 +1,116 @@
+info:
+  contact: {}
+  description: Go练手项目
+  title: 图书借阅系统
+  version: "1.0"
+paths:
+  /book/addbook:
+    get:
+      parameters:
+      - description: 书名
+        in: query
+        name: bookname
+        type: string
+      - description: 作者
+        in: query
+        name: author
+        type: string
+      - description: 封面图片
+        in: query
+        name: img
+        type: string
+      - description: 描述
+        in: query
+        name: desc
+        type: string
+      - description: tag
+        in: query
+        name: tag
+        type: string
+      - description: 图书状态
+        in: query
+        name: isreturn
+        type: string
+      responses:
+        "200":
+          description: code":"message"}
+          schema:
+            type: string
+      summary: 添加图书
+      tags:
+      - 图书模块
+  /book/booklists:
+    get:
+      responses:
+        "200":
+          description: code":"message"}
+          schema:
+            type: string
+      summary: 图书列表
+      tags:
+      - 图书模块
+  /user/login:
+    post:
+      parameters:
+      - description: 用户名
+        in: formData
+        name: name
+        type: string
+      - description: 密码
+        in: formData
+        name: password
+        type: string
+      responses:
+        "302":
+          description: message","data"}
+          schema:
+            type: string
+      summary: 用户登录
+      tags:
+      - 用户模块
+  /user/signin:
+    post:
+      parameters:
+      - description: 用户名
+        in: formData
+        name: name
+        type: string
+      - description: 密码
+        in: formData
+        name: password
+        type: string
+      - description: 重新确认密码
+        in: formData
+        name: repassword
+        type: string
+      - description: QQ号
+        in: formData
+        name: qq
+        type: string
+      - description: 手机号
+        in: formData
+        name: phone
+        type: string
+      - description: 邮箱
+        in: formData
+        name: email
+        type: string
+      responses:
+        "200":
+          description: code":"message"}
+          schema:
+            type: string
+      summary: 注册用户
+      tags:
+      - 用户模块
+  /userlists:
+    get:
+      responses:
+        "200":
+          description: code":"message"}
+          schema:
+            type: string
+      summary: 用户列表
+      tags:
+      - 用户模块
+swagger: "2.0"

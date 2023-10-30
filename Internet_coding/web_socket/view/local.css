@@ -1,0 +1,91 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background: linear-gradient(to right, #578aef, #E55E87, #8f41e9);
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.chat {
+  display: flex;
+}
+
+.chat .online {
+  margin-right: 20px;
+  padding: 18px;
+  border-radius: 5px;
+  min-width: 200px;
+  text-align: center;
+  font-weight: 700;
+  font-size: 18px;
+  background-color: white;
+}
+
+.chat .online .number {
+  padding: 6px;
+  border-bottom: 2px solid #E55E87;
+}
+
+.chat .send_message {
+  padding: 18px;
+  border-radius: 5px;
+  min-height: 400px;
+  background-color: white;
+}
+
+.chat .send_message .title {
+  padding-bottom: 10px;
+  font-size: 20px;
+  font-weight: 600;
+  min-width: 800px;
+  border-bottom: 2px solid #E55E87;
+}
+
+.chat .send_message .message {
+  padding: 18px;
+  margin-top: 10px;
+  background-color: #F1F3F4;
+  height: 300px;
+  overflow: scroll;
+}
+.chat .send_message .message::-webkit-scrollbar {
+display: none
+} 
+
+
+.chat .send_message .pannel {
+  position: relative;
+  margin-top: 10px;
+  width: 100%;
+  min-height: 120px;
+}
+
+.chat .send_message .pannel > textarea {
+  font-size: 20px;
+  width: 100%;
+  height: 80px;
+  overflow: scroll;
+}
+.chat .send_message .pannel > textarea::-webkit-scrollbar {
+display: none
+} 
+
+.chat .send_message .pannel > input {
+  position: absolute;
+  cursor: pointer;
+  right: 0px;
+  bottom: 0px;
+  padding: 8px 18px;
+  background-color: #E55E87;
+  outline: none;
+  border: none;
+  color: white;
+  border-radius: 16px;
+}

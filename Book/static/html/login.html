@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{.title}}</title>
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+            outline: none;
+        }
+
+        body {
+            background: linear-gradient(45deg, #0fc, #66ccff);
+            display: flex;
+            justify-content: center;
+            height: 100vh;
+        }
+
+        .shell,
+        form {
+            position: relative;
+        }
+
+        .shell {
+            display: flex;
+            justify-content: center;
+            align-items: center; /* 添加这个属性 */
+            position: relative;
+            height: 100vh;
+            padding-left: 0;
+        }
+
+        form {
+            margin-left: 0;
+            border-radius: 20px;
+            width: 560px;
+            height: 520px;
+            background-color: transparent;
+            backdrop-filter: blur(5px);
+            -webkit-backdrop-filter: blur(5px);
+            opacity: 0.8;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        #img-box {
+            float: left;
+            width: 521px;
+            height: 520px;
+        }
+
+        #img-box img {
+            height: 100%;
+            border-radius: 20px;
+        }
+
+        #form-body {
+            backdrop-filter: blur(50px);
+            width: 320px;
+            display: flex;
+            opacity: 0.8;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+        }
+
+        #welecome-lines {
+            width: 100%;
+            text-align: center;
+            line-height: 1;
+        }
+
+        #w-line-1 {
+            font-size: 50px;
+        }
+
+        #w-line-2 {
+            font-size: 30px;
+            margin-top: 17px;
+        }
+
+        #input-area {
+            width: 100%;
+            margin-top: 40px;
+        }
+
+        .f-inp {
+            padding: 13px 25px;
+            border: 2px solid #6e6d6d;
+            line-height: 1;
+            border-radius: 20px;
+            margin-bottom: 15px;
+        }
+
+        .f-inp input {
+            width: 100%;
+            font-size: 14px;
+            padding: 0;
+            margin: 0;
+            border: 0;
+            background: transparent;
+        }
+
+        .f-inp input::placeholder {
+            color: black;
+        }
+
+        #submit-button {
+            display: block;
+            width: 100%;
+            color: #fff;
+            font-size: 14px;
+            margin: 0;
+            padding: 14px 40px;
+            border: 0;
+            background-color: #3388ff;
+            border-radius: 25px;
+            line-height: 1;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body style="background: url('/static/imgs/login2.jpg') no-repeat; background-size: cover; display: flex; justify-content: center; height: 100vh; width: 100vw;">
+<div class="shell">
+    <div id="img-box">
+        <img src="/static/imgs/login.jpg" alt="">
+    </div>
+    <form action="/user/login" method="post">
+        <div id="form-body">
+            <div id="welecome-lines">
+                <div id="w-line-1">
+                    Hi,C109er!
+                </div>
+                <div id="w-line-2">
+                    WELECOME!
+                </div>
+                <div id="login-form">
+                    <div id="input-area">
+                        <div class="f-inp"><input type="text" placeholder="username" name="name"></div>
+                        <div class="f-inp"><input type="password" placeholder="password" name="password"></div>
+                    </div>
+                    <div id="submit-button-vcr">
+                        <button type="submit" id="submit-button">LOGIN</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+<script>
+    const loginForm = document.querySelector('form[action="/user/login"]');
+    loginForm.addEventListener('submit', async (event) => {
+        event.preventDefault();
+        // 发送表单数据到后端
+        const response = await fetch('/user/login', {
+            method: 'POST',
+            body: new FormData(loginForm),
+        });
+        // 处理后端响应
+        const statusCode = response.status;
+        switch (statusCode) {
+            case 200:
+                // 登陆成功
+                window.location.href = '/user/index.html';
+                break;
+            case 400:
+                // 用户名或密码错误
+                alert('用户名或密码错误');
+                break;
+            default:
+                // 其他错误
+                alert('发生未知错误，请稍后再试');
+                break;
+        }
+    });
+</script>
+</body>
+</html>

@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<head>
+    <title>用户主界面</title>
+    <style>
+        @font-face {
+            font-family: "优设标题黑";
+            src: url("/static/source/优设标题黑.ttf");
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+            outline: none;
+            text-decoration: none;
+        }
+
+        body {
+            background-image: url('/static/imgs/login.jpg');
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-position: center;
+            background-attachment: fixed;
+            display: flex;
+            justify-content: center;
+            height: 100vh;
+        }
+
+        .search {
+            position: fixed;
+            z-index: 3;
+            padding: 4px;
+            width: 200px;
+            border-radius: 9px;
+        }
+
+        .search input {
+            height: 30px;
+            caret-color: rgb(53, 67, 92);
+            width: 100%;
+            border-radius: 9px;
+            font: 300 18px Comic Sans MS, "华文中宋";
+            background-color: transparent;
+        }
+
+        .search input::placeholder {
+            color: black;
+            text-align: center;
+            font-size: 25px;
+            transform: translateY(0);
+            transition: all 0.3s cubic-bezier(0.39, 0.575, 0.565, 1);
+            opacity: 0.9;
+        }
+
+        .search input:hover::placeholder {
+            transform: translateY(-100%);
+            opacity: 0;
+        }
+
+        .books {
+            justify-content: flex-start;
+            margin-top: 60px;
+            width: 70%;
+            height: 70%;
+            display: flex;
+            flex-direction: row;
+            flex-wrap: wrap;
+            /*justify-content: space-between;*/
+            align-items: center;
+            align-content: space-between;
+        }
+
+        .book {
+            font-family: Comic Sans MS, "华文中宋";
+            margin: 17px; /* 添加边距 */
+            flex: 0 0 230px; /* 控制宽度 */
+            height: 400px; /* 控制高度，根据需要调整 */
+            display: flex; /* 使用 flex 布局 */
+            flex-wrap: wrap; /* 允许换行 */
+            justify-content: space-between; /* 在每行上均匀分布元素 */
+            /*margin-left: 0;*/
+            border-radius: 20px;
+            background-color: transparent;
+            backdrop-filter: blur(5px);
+            -webkit-backdrop-filter: blur(5px);
+            opacity: 0.8;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            align-items: center;
+            border: 2px solid #000;
+            float: left;
+            width: 20%;
+            padding: 10px;
+            box-sizing: border-box;
+            flex-direction: column; /* 让子元素垂直排列 */
+            z-index: 1;
+        }
+
+        .navigation {
+            align-items: center;
+            background-color: rgba(128, 128, 128, 0.5);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            opacity: 0.8;
+            position: fixed;
+            top: 0;
+            width: 100%;
+            height: 38px;
+            z-index: 2;
+            font-family: Comic Sans MS, "华文中宋";
+            font-size: 18px;
+            margin-bottom: 50px;
+        }
+
+        .index, .map {
+            height: 100%;
+        }
+
+        .index {
+            font-family: '优设标题黑';
+            display: flex;
+            align-items: center;
+            margin-left: 20px;
+            float: left;
+            font-size: 28px;
+        }
+
+        .map {
+            float: right;
+            display: flex;
+            justify-content: center;
+            position: relative;
+        }
+
+        .map li {
+            margin-top: -13px;
+        }
+
+        .category, .none {
+            width: 100px;
+            height: 50px;
+            text-align: center;
+            line-height: 65px;
+            transition: .3s;
+            cursor: pointer;
+        }
+
+        .category li:hover {
+            background-color: rgb(255, 254, 243);
+        }
+
+        .category ul li {
+            height: 0;
+            transition: .2s;
+            opacity: 0;
+            transform: translateY(-65px);
+            background-color: rgb(68, 84, 112);
+        }
+
+        .category:hover li {
+            height: 55px;
+            opacity: 1;
+            transform: translateY(0);
+            border-radius: 7px;
+        }
+
+        img {
+            width: 100px;
+        }
+
+        .bookname {
+            text-align: center; /* 文本居中 */
+            word-wrap: break-word; /* 允许换行 */
+        }
+
+        .borrow-button {
+            display: block;
+            width: 100%;
+            color: rgb(156, 157, 179);
+            font-size: 14px;
+            margin: 0;
+            padding: 14px 40px;
+            border: 0;
+            border-radius: 25px;
+            background-color: rgb(57, 67, 86);
+            line-height: 1;
+            cursor: pointer;
+            transition: transform 0.3s; /* 添加 transform 的过渡效果 */
+        }
+
+        .borrow-button:hover {
+            transform: scale(0.8);
+            color: rgb(255, 255, 255);
+            background-color: rgb(189, 187, 199);
+        }
+
+        a {
+            color: black;
+            text-decoration: none;
+        }
+
+        a:hover {
+            color: darkgrey;
+        }
+    </style>
+</head>
+<body>
+<div class="search">
+    <input type="text" placeholder="Search" onkeydown="searchOnEnter(event)">
+    <a href="#"></a>
+</div>
+<div class="navigation">
+    <div class="index">
+        <a href="/user/login">{{.title}}</a>
+    </div>
+    <ul class="map">
+        <li class="none">
+            <span><a href="/user/info">个人信息</a></span>
+        </li>
+        <li class="category">
+            <span>图书分类</span>
+            <ul>
+                <li onclick="handleClick(this)">后端</li>
+                <li onclick="handleClick(this)">前端</li>
+                <li onclick="handleClick(this)">算法</li>
+                <li onclick="handleClick(this)">嵌入式</li>
+                <li onclick="handleClick(this)">计算机底层</li>
+                <li onclick="handleClick(this)">数据库</li>
+                <li onclick="handleClick(this)">大数据</li>
+                <li onclick="handleClick(this)">Android</li>
+                <li onclick="handleClick(this)">小程序</li>
+                <li onclick="handleClick(this)">科普</li>
+                <li onclick="handleClick(this)">其它</li>
+            </ul>
+        </li>
+    </ul>
+</div>
+<div class="books">
+    {{range .books}}
+    <div class="book" data-book-tags="{{.Tags}}" data-book-name="{{.Name}}">
+        <div class="bookname" style="font-size: 20px;font-weight: bold;">
+            <p>{{.Name}}</p>
+        </div>
+        <div class="author">
+            <p>作者:{{.Author}}</p>
+        </div>
+        <div class="img">
+            <img src="{{.Img}}">
+        </div>
+        <div class="description" style="font-size: 18px;">
+            <p>{{.Description}}</p>
+        </div>
+        <div class="isreturn">
+            {{if eq .IsReturn "可借阅"}}
+            <button class="borrow-button" data-book-id="{{.ID}}">借阅</button>
+            {{end}}
+        </div>
+    </div>
+    {{end}}
+</div>
+<script>
+    function handleClick(element) {
+        const category = element.textContent;
+
+        // 获取所有书籍
+        const allBooks = document.querySelectorAll('.book');
+
+        // 遍历所有书籍，根据分类显示或隐藏
+        allBooks.forEach(book => {
+            const bookTags = book.getAttribute('data-book-tags');
+            if (bookTags === category) {
+                book.style.display = 'flex'; // 显示符合分类的书籍
+            } else {
+                book.style.display = 'none'; // 隐藏其他书籍
+            }
+        });
+    }
+        // 获取所有书籍
+        const allBooks = document.querySelectorAll('.book');
+
+        // 搜索功能
+        function searchBooks() {
+        const searchInput = document.querySelector('.search input');
+        const searchTerm = searchInput.value.toLowerCase();
+
+        allBooks.forEach(book => {
+        const bookName = book.getAttribute('data-book-name').toLowerCase();
+        if (bookName.includes(searchTerm)) {
+        book.style.display = 'flex'; // 显示符合搜索条件的书籍
+    } else {
+        book.style.display = 'none'; // 隐藏不符合搜索条件的书籍
+    }
+    });
+    }
+
+        // 监听回车键
+        function searchOnEnter(event) {
+        if (event.key === 'Enter') {
+        searchBooks(); // 当按下回车键时触发搜索功能
+    }
+    }
+</script>
+</body>
+</html>
