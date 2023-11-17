@@ -2,10 +2,11 @@ package main
 
 import (
 	"context"
-	"github.com/chromedp/cdproto/page"
-	"github.com/chromedp/chromedp"
 	"log"
 	"time"
+
+	"github.com/chromedp/cdproto/page"
+	"github.com/chromedp/chromedp"
 )
 
 //	func MouseDragNode(n *cdp.Node, cxt context.Context) error {
@@ -91,11 +92,11 @@ func main() {
 		chromedp.Sleep(time.Second*3),
 		//在引号内写你的账号/手机号
 		chromedp.WaitVisible("#fm-login-id"),
-		chromedp.SendKeys("#fm-login-id", ""),
+		chromedp.SendKeys("#fm-login-id", "13206391063"),
 		chromedp.Sleep(time.Second*5),
 		chromedp.Click("#fm-login-password"),
 		//在引号里写你的密码
-		chromedp.SendKeys("#fm-login-password", ""),
+		chromedp.SendKeys("#fm-login-password", "20040115bnh"),
 		chromedp.Click(".fm-submit.password-login"),
 		chromedp.Sleep(time.Second*5),
 		chromedp.Click("#adrive-nav-sub-tab-container > ul > li:nth-child(2) > div > span"),

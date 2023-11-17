@@ -85,6 +85,36 @@ const docTemplate = `{
                 }
             }
         },
+        "/book/updatebook": {
+            "get": {
+                "tags": [
+                    "图书模块"
+                ],
+                "summary": "修改图书借阅状态",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "图书ID",
+                        "name": "id",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "description": "图书状态",
+                        "name": "isreturn",
+                        "in": "query"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "code\":\"message\"}",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        },
         "/user/login": {
             "post": {
                 "tags": [
@@ -148,33 +178,11 @@ const docTemplate = `{
                     },
                     {
                         "type": "string",
-                        "description": "手机号",
-                        "name": "phone",
-                        "in": "formData"
-                    },
-                    {
-                        "type": "string",
                         "description": "邮箱",
                         "name": "email",
                         "in": "formData"
                     }
                 ],
-                "responses": {
-                    "200": {
-                        "description": "code\":\"message\"}",
-                        "schema": {
-                            "type": "string"
-                        }
-                    }
-                }
-            }
-        },
-        "/userlists": {
-            "get": {
-                "tags": [
-                    "用户模块"
-                ],
-                "summary": "用户列表",
                 "responses": {
                     "200": {
                         "description": "code\":\"message\"}",

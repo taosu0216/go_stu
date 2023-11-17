@@ -8,18 +8,6 @@ import (
 	"math/rand"
 )
 
-// GetUserLists
-// @Summary	用户列表
-// @Tags    用户模块
-// @Success	200	{string}	json{"code":"message"}
-// @Router		/userlists [get]
-func GetUserLists(c *gin.Context) {
-	lists := models.GetUserLists()
-	c.JSON(200, gin.H{
-		"userlists": lists,
-	})
-}
-
 // CreateUser
 // @Summary	注册用户
 // @Tags    用户模块
@@ -27,7 +15,6 @@ func GetUserLists(c *gin.Context) {
 // @Param 	password 	formData 	string 	false 	"密码"
 // @Param 	repassword 	formData 	string 	false 	"重新确认密码"
 // @Param 	qq 			formData 	string 	false 	"QQ号"
-// @Param 	phone 		formData 	string 	false 	"手机号"
 // @Param   email 		formData 	string 	false 	"邮箱"
 // @Success	200	{string}	json{"code":"message"}
 // @Router		/user/signin [post]
@@ -37,7 +24,6 @@ func CreateUser(c *gin.Context) {
 	passwd := c.PostForm("password")
 	repasswd := c.PostForm("repassword")
 	user.QQ = c.PostForm("qq")
-	user.Phone = c.PostForm("phone")
 	user.Email = c.PostForm("email")
 	user.Salt = fmt.Sprintf("%06d", rand.Int31())
 	//判断用户名是否被占用
@@ -55,15 +41,14 @@ func CreateUser(c *gin.Context) {
 		return
 	}
 	user.PassWord = utils.MakePasswd(passwd, user.Salt)
-	user.Token = utils.MakeToken()
-	isFind := models.CreateUser(user)
-	err := models.UserInfoUpdate(user)
-	if err != nil {
+	token, err := models.MakeToken(user)
+	if err != nil || token == "" {
 		c.JSON(400, gin.H{
-			"message": "failed to update user info...",
+			"message": "token生成失败!",
 		})
 		return
 	}
+	isFind := models.CreateUser(user)
 	if isFind {
 		c.JSON(400, gin.H{
 			"message": "failed to create user...",
@@ -72,6 +57,7 @@ func CreateUser(c *gin.Context) {
 	} else {
 		c.JSON(200, gin.H{
 			"message": "用户创建成功!",
+			"token":   token,
 		})
 	}
 }
@@ -97,23 +83,18 @@ func Login(c *gin.Context) {
 			"message": "密码错误!",
 		})
 	} else {
-		user.Token = utils.MakeToken()
-		err := models.UserInfoUpdate(user)
-		if err != nil {
+		token, err := models.MakeToken(user)
+		if err != nil || token == "" {
 			c.JSON(400, gin.H{
-				"message": "登陆失败!",
+				"message": "token生成失败!",
 			})
 			return
 		}
-		//c.Redirect(302, "/user/index.html")
-		//c.SetCookie("token", user.Token, 60*60*24, "/", "localhost", false, true)
 		c.JSON(200, gin.H{
 			"message": "登录成功,跳转首页",
-			"data": gin.H{
-				"用户名": user.Name,
-				"QQ号": user.QQ,
-				//"token:": user.Token,
-			},
+			"name":    user.Name,
+			"qq":      user.QQ,
+			"token:":  token,
 		})
 	}
 }

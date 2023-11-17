@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{{.title}}</title>
+    <style>
+        .add_user{
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        .add_user input{
+            width: 200px;
+        }
+    </style>
+</head>
+<body>
+    <form action="/user/signin" method="post">
+        <div class="add_user">
+            <input type="text" placeholder="新的图书管理员名字" name="name">
+            <input type="password" placeholder="密码" name="password">
+            <input type="password" placeholder="确认密码" name="repassword">
+            <input type="text" placeholder="QQ号" name="qq">
+            <input type="email" placeholder="邮箱" name="email">
+        </div>
+        <button type="submit">提交</button>
+    </form>
+
+<!--    添加图书    -->
+    <form action="/book/addbook" method="get">
+        <div class="add_book">
+            <input type="text" placeholder="书名" name="bookname">
+            <input type="text" placeholder="作者" name="author">
+            <input type="text" placeholder="封面图片" name="img">
+            <input type="text" placeholder="描述" name="desc">
+            <input type="text" placeholder="tag" name="tag">
+            <input type="text" placeholder="图书状态" name="isreturn">
+            <button type="submit">提交</button>
+        </div>
+    </form>
+
+<!--    修改图书借阅状态(根据图书ID查询)-->
+    <form action="/book/updatebook" method="get">
+        <div class="update_book">
+            <input type="text" placeholder="图书ID" name="id">
+            <input type="text" placeholder="图书状态" name="isreturn">
+            <button type="submit">提交</button>
+        </div>
+    </form>
+</body>
+</html>

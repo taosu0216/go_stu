@@ -1,6 +1,7 @@
 package main
 
 import (
+	"Book/buildUserTable"
 	"Book/router"
 	"Book/utils"
 	"log"
@@ -12,6 +13,8 @@ import (
 func main() {
 	utils.InitConfig()
 	utils.InitMySQL()
+	//buildBookTable.BuildBook()
+	buildUserTable.BuildUser()
 	r := router.Router()
 	err := r.Run("0.0.0.0:5678")
 	if err != nil {

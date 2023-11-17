@@ -3,14 +3,11 @@ package models
 import (
 	"Book/handler"
 	"Book/utils"
+	"github.com/dgrijalva/jwt-go"
 	"gorm.io/gorm"
+	"time"
 )
 
-func GetUserLists() []*UserInfo {
-	lists := make([]*UserInfo, 300)
-	utils.DB.Find(&lists)
-	return lists
-}
 func CreateUser(user *UserInfo) bool {
 	result := utils.DB.Create(user)
 	if result.Error != nil {
@@ -38,12 +35,32 @@ func IsUserExit(user *UserInfo) bool {
 	}
 }
 
-func UserInfoUpdate(user *UserInfo) error {
-	result := utils.DB.Model(&user).Updates(UserInfo{
-		Token: user.Token,
-	})
-	if result.Error != nil {
-		return result.Error
+// MakeToken 建立token
+func MakeToken(u *UserInfo) (string, error) {
+	expirationTime := time.Now().Add(3 * time.Minute)
+	claims := &MyClaims{
+		UserId:   u.Id,
+		Username: u.Name,
+		StandardClaims: jwt.StandardClaims{
+			ExpiresAt: expirationTime.Unix(),
+			IssuedAt:  time.Now().Unix(),
+			Subject:   "token",
+			Issuer:    "taosu",
+		},
 	}
-	return nil
+	token := jwt.NewWithClaims(jwt.SigningMethodHS256, claims)
+	tokenString, err := token.SignedString(JwtKey)
+	if err != nil {
+		return "", err
+	}
+	return tokenString, nil
+}
+
+// ParseToken 解析token
+func ParseToken(tokenString string) (*jwt.Token, *MyClaims, error) {
+	claims := &MyClaims{}
+	token, err := jwt.ParseWithClaims(tokenString, claims, func(token *jwt.Token) (interface{}, error) {
+		return JwtKey, nil
+	})
+	return token, claims, err
 }

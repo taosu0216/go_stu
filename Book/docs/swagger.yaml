@@ -49,6 +49,25 @@ paths:
       summary: 图书列表
       tags:
       - 图书模块
+  /book/updatebook:
+    get:
+      parameters:
+      - description: 图书ID
+        in: query
+        name: id
+        type: string
+      - description: 图书状态
+        in: query
+        name: isreturn
+        type: string
+      responses:
+        "200":
+          description: code":"message"}
+          schema:
+            type: string
+      summary: 修改图书借阅状态
+      tags:
+      - 图书模块
   /user/login:
     post:
       parameters:
@@ -87,10 +106,6 @@ paths:
         in: formData
         name: qq
         type: string
-      - description: 手机号
-        in: formData
-        name: phone
-        type: string
       - description: 邮箱
         in: formData
         name: email
@@ -101,16 +116,6 @@ paths:
           schema:
             type: string
       summary: 注册用户
-      tags:
-      - 用户模块
-  /userlists:
-    get:
-      responses:
-        "200":
-          description: code":"message"}
-          schema:
-            type: string
-      summary: 用户列表
       tags:
       - 用户模块
 swagger: "2.0"

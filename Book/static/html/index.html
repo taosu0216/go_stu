@@ -175,13 +175,13 @@
         .borrow-button {
             display: block;
             width: 100%;
-            color: rgb(156, 157, 179);
+            font-weight: bold;
             font-size: 14px;
             margin: 0;
             padding: 14px 40px;
             border: 0;
             border-radius: 25px;
-            background-color: rgb(57, 67, 86);
+            background-color: rgb(198,193,201);
             line-height: 1;
             cursor: pointer;
             transition: transform 0.3s; /* 添加 transform 的过渡效果 */
@@ -251,7 +251,9 @@
         </div>
         <div class="isreturn">
             {{if eq .IsReturn "可借阅"}}
-            <button class="borrow-button" data-book-id="{{.ID}}">借阅</button>
+            <button class="borrow-button" data-book-id="{{.ID}}" style="color: darkorange">可借阅</button>
+            {{else}}
+            <button class="borrow-button" data-book-id="{{.ID}}" style="color: black;">未归还</button>
             {{end}}
         </div>
     </div>

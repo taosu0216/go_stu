@@ -13,13 +13,14 @@ func Index(c *gin.Context) {
 		"books": lists,
 	})
 }
-func Userinfo(c *gin.Context) {
-	c.HTML(http.StatusOK, "info.html", gin.H{
-		"title": "用户主界面",
-	})
-}
 func ShowLoginPage(c *gin.Context) {
 	c.HTML(http.StatusOK, "login.html", gin.H{
+		"title": "C109图书角",
+	})
+}
+
+func ShowIndexPage(c *gin.Context) {
+	c.HTML(http.StatusOK, "userindex.html", gin.H{
 		"title": "C109图书角",
 	})
 }

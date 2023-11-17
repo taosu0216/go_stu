@@ -3,9 +3,7 @@ package utils
 import (
 	"crypto/md5"
 	"encoding/hex"
-	"fmt"
 	"strings"
-	"time"
 )
 
 func Md5Encode(data string) string {
@@ -22,8 +20,4 @@ func MakePasswd(plainpwd, salt string) string {
 }
 func ValidPasswd(plainpwd, salt, passwd string) bool {
 	return Md5Encode(plainpwd+salt) == passwd
-}
-func MakeToken() string {
-	tmp := fmt.Sprintf("%d", time.Now().Unix())
-	return tmp
 }

@@ -1,27 +1,25 @@
 package models
 
 import (
-	"gorm.io/gorm"
+	"github.com/dgrijalva/jwt-go"
 )
 
+var JwtKey = []byte("1433223qluorangestudiocn_SBCMBDSJNabjBKBKBUHKLJbkjds")
+
 type UserInfo struct {
-	gorm.Model
-	Name     string `gorm:"foreignKey:UserName"`
+	//gorm.Model
+	Id       int    `gorm:"primarykey;autoIncrement" json:"id"`
+	Name     string `json:"username"`
 	PassWord string
 	QQ       string
 	Email    string `valid:"email"`
-	Phone    string `valid:"matches(^1[3-9]{1}\\d{9}$)"`
-	Token    string
 	Salt     string
 }
 
-type Borrowed struct {
-	gorm.Model
-	UserName         string
-	BorrowedBookName string
-	BorrowedTime     string
-	ReturnTime       string
-	IsReturn         string
+type MyClaims struct {
+	UserId   int    `json:"user_id"`
+	Username string `json:"username"`
+	jwt.StandardClaims
 }
 
 func (table *UserInfo) TableName() string {
