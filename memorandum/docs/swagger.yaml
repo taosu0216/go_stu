@@ -1,0 +1,61 @@
+info:
+  contact: {}
+  description: This is a demo using Hertz.
+  title: HertzTest
+  version: "1.0"
+paths:
+  /auth/hello:
+    get:
+      consumes:
+      - application/json
+      description: Description 你好
+      parameters:
+      - description: Bearer JWT-TOKEN
+        in: header
+        name: Authorization
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: data","msg"}
+          schema:
+            type: string
+      summary: 你好
+  /login:
+    post:
+      description: Description 登陆
+      parameters:
+      - description: username
+        in: formData
+        name: username
+        type: string
+      - description: password
+        in: formData
+        name: password
+        type: string
+      responses:
+        "200":
+          description: message"}
+          schema:
+            type: string
+      summary: 登陆
+  /signin:
+    post:
+      description: Description 注册
+      parameters:
+      - description: username
+        in: formData
+        name: username
+        type: string
+      - description: password
+        in: formData
+        name: password
+        type: string
+      responses:
+        "200":
+          description: message"}
+          schema:
+            type: string
+      summary: 注册
+swagger: "2.0"
