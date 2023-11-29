@@ -17,12 +17,15 @@ const docTemplate = `{
     "paths": {
         "/auth/hello": {
             "get": {
-                "description": "Description 你好",
+                "description": "token模板\n\"taosu *****.**************.************\"",
                 "consumes": [
                     "application/json"
                 ],
                 "produces": [
                     "application/json"
+                ],
+                "tags": [
+                    "测试"
                 ],
                 "summary": "你好",
                 "parameters": [
@@ -46,6 +49,9 @@ const docTemplate = `{
         "/login": {
             "post": {
                 "description": "Description 登陆",
+                "tags": [
+                    "user"
+                ],
                 "summary": "登陆",
                 "parameters": [
                     {
@@ -74,6 +80,9 @@ const docTemplate = `{
         "/signin": {
             "post": {
                 "description": "Description 注册",
+                "tags": [
+                    "user"
+                ],
                 "summary": "注册",
                 "parameters": [
                     {
@@ -98,6 +107,173 @@ const docTemplate = `{
                     }
                 }
             }
+        },
+        "/user/createitem": {
+            "get": {
+                "description": "Description 创建待办事项",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "item_CRUD"
+                ],
+                "summary": "增",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Bearer JWT-TOKEN",
+                        "name": "Authorization",
+                        "in": "header"
+                    },
+                    {
+                        "type": "string",
+                        "description": "item",
+                        "name": "item",
+                        "in": "query"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "data\",\"msg\"}",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        },
+        "/user/deleteitem": {
+            "post": {
+                "description": "Description 删除待办事项",
+                "tags": [
+                    "item_CRUD"
+                ],
+                "summary": "删",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Bearer JWT-TOKEN",
+                        "name": "Authorization",
+                        "in": "header"
+                    },
+                    {
+                        "type": "string",
+                        "description": "item",
+                        "name": "item",
+                        "in": "formData"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "data\",\"msg\"}",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        },
+        "/user/edititemstatus": {
+            "post": {
+                "description": "Description 修改待办事项状态",
+                "tags": [
+                    "item_CRUD"
+                ],
+                "summary": "改",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Bearer JWT-TOKEN",
+                        "name": "Authorization",
+                        "in": "header"
+                    },
+                    {
+                        "type": "string",
+                        "description": "item",
+                        "name": "item",
+                        "in": "formData"
+                    },
+                    {
+                        "type": "string",
+                        "description": "status",
+                        "name": "status",
+                        "in": "formData"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "data\",\"msg\"}",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        },
+        "/user/finditem": {
+            "get": {
+                "description": "Description 查询待办事项",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "item_CRUD"
+                ],
+                "summary": "查",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Bearer JWT-TOKEN",
+                        "name": "Authorization",
+                        "in": "header"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "data\",\"msg\"}",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        },
+        "/user/test": {
+            "get": {
+                "description": "Description 创建待办事项",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "item_CRUD"
+                ],
+                "summary": "测试",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Bearer JWT-TOKEN",
+                        "name": "Authorization",
+                        "in": "header"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "data\",\"msg\"}",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
         }
     }
 }`
@@ -108,8 +284,8 @@ var SwaggerInfo = &swag.Spec{
 	Host:             "",
 	BasePath:         "",
 	Schemes:          []string{},
-	Title:            "HertzTest",
-	Description:      "This is a demo using Hertz.",
+	Title:            "Taosuの备忘录demo",
+	Description:      "用Hertz创建的简单备忘录demo.",
 	InfoInstanceName: "swagger",
 	SwaggerTemplate:  docTemplate,
 	LeftDelim:        "{{",

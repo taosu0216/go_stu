@@ -1,0 +1,24 @@
+version: '3'
+networks:
+  app-network:
+    driver: bridge
+services:
+  go-server:
+    build: .
+    ports:
+      - "6789:6789"
+    depends_on:
+      - mysql
+    networks:
+      - app-network
+
+  mysql:
+    container_name: mysql
+    image: mysql
+    environment:
+      - MYSQL_DATABASE=memorandum
+      - MYSQL_USER=taosu
+      - MYSQL_PASSWORD=0216
+      - MYSQL_ROOT_PASSWORD=root
+    networks:
+      - app-network

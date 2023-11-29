@@ -1,14 +1,16 @@
 info:
   contact: {}
-  description: This is a demo using Hertz.
-  title: HertzTest
+  description: 用Hertz创建的简单备忘录demo.
+  title: Taosuの备忘录demo
   version: "1.0"
 paths:
   /auth/hello:
     get:
       consumes:
       - application/json
-      description: Description 你好
+      description: |-
+        token模板
+        "taosu *****.**************.************"
       parameters:
       - description: Bearer JWT-TOKEN
         in: header
@@ -22,6 +24,8 @@ paths:
           schema:
             type: string
       summary: 你好
+      tags:
+      - 测试
   /login:
     post:
       description: Description 登陆
@@ -40,6 +44,8 @@ paths:
           schema:
             type: string
       summary: 登陆
+      tags:
+      - user
   /signin:
     post:
       description: Description 注册
@@ -58,4 +64,114 @@ paths:
           schema:
             type: string
       summary: 注册
+      tags:
+      - user
+  /user/createitem:
+    get:
+      consumes:
+      - application/json
+      description: Description 创建待办事项
+      parameters:
+      - description: Bearer JWT-TOKEN
+        in: header
+        name: Authorization
+        type: string
+      - description: item
+        in: query
+        name: item
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: data","msg"}
+          schema:
+            type: string
+      summary: 增
+      tags:
+      - item_CRUD
+  /user/deleteitem:
+    post:
+      description: Description 删除待办事项
+      parameters:
+      - description: Bearer JWT-TOKEN
+        in: header
+        name: Authorization
+        type: string
+      - description: item
+        in: formData
+        name: item
+        type: string
+      responses:
+        "200":
+          description: data","msg"}
+          schema:
+            type: string
+      summary: 删
+      tags:
+      - item_CRUD
+  /user/edititemstatus:
+    post:
+      description: Description 修改待办事项状态
+      parameters:
+      - description: Bearer JWT-TOKEN
+        in: header
+        name: Authorization
+        type: string
+      - description: item
+        in: formData
+        name: item
+        type: string
+      - description: status
+        in: formData
+        name: status
+        type: string
+      responses:
+        "200":
+          description: data","msg"}
+          schema:
+            type: string
+      summary: 改
+      tags:
+      - item_CRUD
+  /user/finditem:
+    get:
+      consumes:
+      - application/json
+      description: Description 查询待办事项
+      parameters:
+      - description: Bearer JWT-TOKEN
+        in: header
+        name: Authorization
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: data","msg"}
+          schema:
+            type: string
+      summary: 查
+      tags:
+      - item_CRUD
+  /user/test:
+    get:
+      consumes:
+      - application/json
+      description: Description 创建待办事项
+      parameters:
+      - description: Bearer JWT-TOKEN
+        in: header
+        name: Authorization
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: data","msg"}
+          schema:
+            type: string
+      summary: 测试
+      tags:
+      - item_CRUD
 swagger: "2.0"

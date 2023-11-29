@@ -6,14 +6,14 @@ import (
 	"memorandum/util"
 )
 
-//	@title			HertzTest
+//	@title			Taosuの备忘录demo
 //	@version		1.0
-//	@description	This is a demo using Hertz.
+//	@description	用Hertz创建的简单备忘录demo.
 
 func main() {
 	util.InitConfig()
 	util.InitMysql()
 	test.BuildUserTable()
-	h := router.RouterExec()
+	h := router.EnterExec()
 	h.Spin()
 }

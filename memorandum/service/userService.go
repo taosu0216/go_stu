@@ -10,13 +10,15 @@ import (
 
 // Hello 123 handler
 //
-//		@Summary		你好
-//		@Description	Description 你好
-//		@Accept			application/json
-//		@Produce		application/json
-//	 @Param Authorization header string false "Bearer JWT-TOKEN"
-//		@Success 200 {string} json{"data","msg"}
-//		@Router			/auth/hello [get]
+//	     @Tags  测试
+//			@Summary		你好
+//			@Description	token模板
+//			@Description    "taosu *****.**************.************"
+//			@Accept			application/json
+//			@Produce		application/json
+//		 	@Param Authorization header string false "Bearer JWT-TOKEN"
+//			@Success 200 {string} json{"data","msg"}
+//			@Router			/auth/hello [get]
 func Hello(ctx context.Context, c *app.RequestContext) {
 	c.JSON(200, utils.H{
 		"data": "hello",
@@ -26,6 +28,7 @@ func Hello(ctx context.Context, c *app.RequestContext) {
 
 // Login test handler
 //
+// @Tags	user
 // @Summary		登陆
 // @Description	Description 登陆
 // @Param username formData string false "username"
@@ -55,6 +58,7 @@ func Login(ctx context.Context, c *app.RequestContext) {
 
 // SignIn test handler
 // @Summary		注册
+// @Tags	user
 // @Description	Description 注册
 // @Param username formData string false "username"
 // @Param password formData string false "password"
