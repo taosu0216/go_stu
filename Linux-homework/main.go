@@ -9,5 +9,5 @@ func main() {
 	utils.Install()
 	utils.BuildTable()
 	utils.Only()
-	utils.Sh()
+	utils.Cpu_info_Sh()
 }

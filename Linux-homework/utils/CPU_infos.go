@@ -12,7 +12,7 @@ import (
 var cpu model.CPU
 
 func ReadCPU_Infos() {
-	file, err := os.Open("./AllInfos/cpu_infos.txt")
+	file, err := os.Open("./missions/AllInfos/cpu_infos.txt")
 	if !ErrIsExist(err, "打开CPU信息文件失败") {
 		fmt.Println("打开CPU信息文件成功")
 		defer file.Close()
@@ -40,7 +40,6 @@ func GetPackages(scanner *bufio.Scanner) string {
 		}
 		if isPackagesLine && flag {
 			packages := line
-			fmt.Println("packages is : ", packages)
 			flag = false
 			isPackagesLine = false
 			return packages

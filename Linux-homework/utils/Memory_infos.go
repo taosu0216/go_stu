@@ -12,7 +12,7 @@ import (
 var mem model.Memory
 
 func ReadMenory_Infos() {
-	file, err := os.Open("./AllInfos/memory_infos.txt")
+	file, err := os.Open("./missions/AllInfos/memory_infos.txt")
 	if !ErrIsExist(err, "打开系统内存信息文件失败") {
 		fmt.Println("打开系统内存信息文件成功")
 		defer file.Close()
