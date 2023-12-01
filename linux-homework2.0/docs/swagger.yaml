@@ -1,0 +1,43 @@
+info:
+  contact: {}
+paths:
+  /login:
+    post:
+      description: Description 登陆
+      parameters:
+      - description: username
+        in: formData
+        name: username
+        type: string
+      - description: password
+        in: formData
+        name: password
+        type: string
+      responses:
+        "200":
+          description: message"}
+          schema:
+            type: string
+      summary: 登陆
+      tags:
+      - user
+  /user/getinfos:
+    get:
+      consumes:
+      - application/json
+      description: 获取信息
+      parameters:
+      - description: Bearer JWT-TOKEN
+        in: header
+        name: Authorization
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: msg"}
+          schema:
+            type: string
+      tags:
+      - 功能
+swagger: "2.0"
